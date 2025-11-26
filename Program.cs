@@ -4,11 +4,9 @@ using CrimeWatch.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
-// Configurando o Entity Framework para usar PostgreSQL
 builder.Services.AddEntityFrameworkNpgsql()
     .AddDbContext<Contexto>(options =>
         options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -22,7 +20,6 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -34,7 +31,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthentication(); // Certifique-se de que a autenticação é usada antes da autorização
+app.UseAuthentication(); 
 app.UseAuthorization();
 
 app.MapControllerRoute(
